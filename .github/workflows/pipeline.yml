@@ -1,0 +1,71 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test_and_build:
+    name: Test and Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Rebase to get latest changes
+        run: |
+          git fetch origin main
+          git rebase origin/main
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Tests
+        run: npm test
+
+      - name: Build
+        run: npm run build f-core
+
+      - name: List contents of build directory
+        run: ls -al dist/f-core
+
+  increment_and_publish:
+    name: Increment Version and Publish
+    if: contains(github.event.head_commit.message, '[update_version]')
+    needs: test_and_build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Increment version in package.json
+        run: npm version patch --prefix projects/f-core
+
+      - name: Commit version increment
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.MY_GITHUB_TOKEN }}
+          message: "Increment version"
+          branch: main
+
+      - name: Disable Git
+        run: git config --global url."https://".insteadOf ssh://
+
+      - name: Set up .npmrc file for authentication
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > dist/f-core/.npmrc
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish to NPM
+        run: |
+          cd dist/f-core
+          npm publish --access public --registry https://registry.npmjs.org/
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
