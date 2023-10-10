@@ -17,3 +17,4 @@ To install the library, use the following command:
 
 ```bash
 npm install @foblex/core
+```
