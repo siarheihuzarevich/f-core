@@ -28,6 +28,7 @@ export class DomElementExtensions {
     return document.createElement(tag);
   }
 
+  //from angular material cdk drag-and-drop
   public static deepCloneNode<T extends (HTMLElement | SVGElement)>(node: T): T {
     const clone = node.cloneNode(true) as T;
     const descendantsWithId = clone.querySelectorAll('[id]');

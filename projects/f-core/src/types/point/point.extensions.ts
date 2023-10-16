@@ -61,4 +61,14 @@ export class PointExtensions {
     }
     return result;
   }
+
+  public static elementTransform(point: IPoint, element: HTMLElement): IPoint {
+    let result: IPoint = PointExtensions.initialize(point.x, point.y);
+
+    let matrix = element.getBoundingClientRect();
+
+    result = PointExtensions.sub(result, PointExtensions.initialize(matrix.left, matrix.top));
+
+    return result;
+  }
 }
