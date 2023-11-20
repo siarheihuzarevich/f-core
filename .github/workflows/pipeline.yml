@@ -47,6 +47,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Build
+        run: npm run build ${{ env.PROJECT_NAME }}
+
+      - name: List contents of build directory
+        run: ls -al dist/${{ env.PROJECT_NAME }}
+
       - name: Increment version in package.json
         run: npm version patch --prefix projects/${{ env.PROJECT_NAME }}
 
