@@ -32,12 +32,6 @@ jobs:
       - name: Run Tests
         run: npm test -- --passWithNoTests
 
-      - name: Build
-        run: npm run build ${{ env.PROJECT_NAME }}
-
-      - name: List contents of build directory
-        run: ls -al dist/${{ env.PROJECT_NAME }}
-
       - name: Increment version in package.json
         run: npm version patch --prefix projects/${{ env.PROJECT_NAME }}
 
@@ -47,6 +41,17 @@ jobs:
           github_token: ${{ secrets.MY_GITHUB_TOKEN }}
           message: "Increment version"
           branch: main
+
+      - name: Rebase to get latest changes
+        run: |
+          git fetch origin main
+          git rebase origin/main
+
+      - name: Build
+        run: npm run build ${{ env.PROJECT_NAME }}
+
+      - name: List contents of build directory
+        run: ls -al dist/${{ env.PROJECT_NAME }}
 
       - name: Disable Git
         run: git config --global url."https://".insteadOf ssh://
