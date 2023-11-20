@@ -38,21 +38,6 @@ jobs:
       - name: List contents of build directory
         run: ls -al dist/${{ env.PROJECT_NAME }}
 
-  increment_and_publish:
-    name: Increment Version and Publish
-    if: contains(github.event.head_commit.message, '[update_version]')
-    needs: test_and_build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Build
-        run: npm run build ${{ env.PROJECT_NAME }}
-
-      - name: List contents of build directory
-        run: ls -al dist/${{ env.PROJECT_NAME }}
-
       - name: Increment version in package.json
         run: npm version patch --prefix projects/${{ env.PROJECT_NAME }}
 
