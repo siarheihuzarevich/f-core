@@ -42,11 +42,6 @@ jobs:
           message: "Increment version"
           branch: main
 
-      - name: Rebase to get latest changes
-        run: |
-          git fetch origin main
-          git rebase origin/main
-
       - name: Build
         run: npm run build ${{ env.PROJECT_NAME }}
 
