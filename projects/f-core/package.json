@@ -1,6 +1,6 @@
 {
   "name": "@foblex/core",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A core library providing a set of utilities and interfaces for various projects.",
   "author": "Siarhei Huzarevich",
   "license": "MIT",
