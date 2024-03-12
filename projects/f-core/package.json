@@ -1,6 +1,6 @@
 {
   "name": "@foblex/core",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A core library providing a set of utilities and interfaces for various projects.",
   "main": "index.js",
   "types": "index.d.ts",

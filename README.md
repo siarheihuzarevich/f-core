@@ -9,6 +9,7 @@ f-core is a versatile library that provides a robust set of utilities and interf
 - **DOM Element**: Extensions and utilities to simplify DOM element operations.
 - **Drag and Drop**: Comprehensive tools to handle drag-and-drop operations seamlessly.
 - **Infrastructure**: Base classes and interfaces to set up the core functionality of applications.
+- **Mixins**: A set of mixins to extend the functionality of classes and objects.
 
 ## Installation:
 
