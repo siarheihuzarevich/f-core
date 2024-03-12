@@ -32,15 +32,15 @@ jobs:
       - name: Run Tests
         run: npm test -- --passWithNoTests
 
-      - name: Increment version in package.json
-        run: npm version patch --prefix projects/${{ env.PROJECT_NAME }}
-
-      - name: Commit version increment
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.MY_GITHUB_TOKEN }}
-          message: "Increment version"
-          branch: main
+#      - name: Increment version in package.json
+#        run: npm version patch --prefix projects/${{ env.PROJECT_NAME }}
+#
+#      - name: Commit version increment
+#        uses: ad-m/github-push-action@master
+#        with:
+#          github_token: ${{ secrets.MY_GITHUB_TOKEN }}
+#          message: "Increment version"
+#          branch: main
 
       - name: Build
         run: npm run build ${{ env.PROJECT_NAME }}

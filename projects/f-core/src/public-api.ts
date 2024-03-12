@@ -6,5 +6,7 @@ export * from './platform';
 
 export * from './infrastructure';
 
+export * from './mixins';
+
 export * from './types';
 

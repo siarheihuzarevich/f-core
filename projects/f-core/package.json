@@ -1,7 +1,20 @@
 {
   "name": "@foblex/core",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A core library providing a set of utilities and interfaces for various projects.",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/siarheihuzarevich/f-core.git"
+  },
+  "private": false,
+  "keywords": [
+    "Angular",
+    "Foblex",
+    "development",
+    "kit"
+  ],
   "author": "Siarhei Huzarevich",
   "license": "MIT",
   "dependencies": {
