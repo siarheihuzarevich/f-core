@@ -9,11 +9,11 @@ export function mixinFitToParent<T extends AbstractConstructor<ITransformable>>(
 export function mixinFitToParent<T extends Constructor<ITransformable>>(base: T): CanFitToParentConstructor & T {
   return class extends base {
 
-    public fitToParent(rect: IRect, parentRect: IRect, points: IPoint[]): void {
+    public fitToParent(rect: IRect, parentRect: IRect, points: IPoint[], toCenter: IPoint): void {
       this.transform.scaledPosition = PointExtensions.initialize();
       this.transform.position = this.getZeroPositionWithoutScale(points);
-      const itemsContainerWidth = rect.width / this.transform.scale;
-      const itemsContainerHeight = rect.height / this.transform.scale;
+      const itemsContainerWidth = (rect.width / this.transform.scale) + toCenter.x;
+      const itemsContainerHeight = (rect.height / this.transform.scale) + toCenter.y;
       if (
           (itemsContainerWidth > parentRect.width || itemsContainerHeight > parentRect.height) ||
           itemsContainerWidth < parentRect.width && itemsContainerHeight < parentRect.height
@@ -24,7 +24,8 @@ export function mixinFitToParent<T extends Constructor<ITransformable>>(base: T)
       const newX = (parentRect.width - itemsContainerWidth * this.transform.scale) / 2 - this.transform.position.x * this.transform.scale;
       const newY = (parentRect.height - itemsContainerHeight * this.transform.scale) / 2 - this.transform.position.y * this.transform.scale;
 
-      this.transform.position = PointExtensions.initialize(newX, newY);
+      this.transform.position = PointExtensions.initialize(newX + (toCenter.x / 2) * this.transform.scale, newY + (toCenter.y / 2) * this.transform.scale)
+
     }
 
     private getZeroPositionWithoutScale(points: IPoint[]): IPoint {

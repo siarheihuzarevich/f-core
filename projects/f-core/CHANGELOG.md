@@ -1,3 +1,9 @@
+## [1.1.0] - 2024-03-12
+### Changed
+
+- `fitToParent mixin` Added toCenter: IPoint parameter
+
+
 ## [1.0.9] - 2024-03-12
 ### Added
 
