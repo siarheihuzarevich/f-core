@@ -1,8 +1,12 @@
+export * from './arc';
+
 export * from './boolean';
 
 export * from './event';
 
 export * from './guid';
+
+export * from './line';
 
 export * from './number';
 

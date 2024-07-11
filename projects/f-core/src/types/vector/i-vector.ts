@@ -1,8 +1,5 @@
 import { IPoint } from '../point';
 
-export interface IVector {
+export interface IVector extends IPoint {
 
-  point1: IPoint;
-
-  point2: IPoint;
 }
