@@ -36,6 +36,15 @@ export class PointExtensions {
     return { x: (point.x * value), y: (point.y * value) };
   }
 
+  public static interpolatePoints(point1: IPoint, point2: IPoint, t: number): IPoint {
+    const oneMinusT = 1.0 - t;
+
+    return PointExtensions.initialize(
+      point1.x * oneMinusT + point2.x * t,
+      point1.y * oneMinusT + point2.y * t
+    );
+  }
+
   public static roundTo(point: IPoint, size: number): IPoint {
     const xCount = Math.trunc(point.x / size);
     const yCount = Math.trunc(point.y / size);
@@ -46,6 +55,26 @@ export class PointExtensions {
     const a = (point2.x - point1.x);
     const b = (point2.y - point1.y);
     return Math.abs(Math.sqrt( a * a + b * b));
+  }
+
+  public static distance(point1: IPoint, point2: IPoint): number {
+    const dx = point1.x - point2.x;
+    const dy = point1.y - point2.y;
+    return Math.sqrt(dx * dx + dy * dy);
+  }
+
+  public static getMinimum(point1: IPoint, point2: IPoint): IPoint {
+    return PointExtensions.initialize(
+      Math.min(point1.x, point2.x),
+      Math.min(point1.y, point2.y)
+    );
+  }
+
+  public static getMaximum(point1: IPoint, point2: IPoint): IPoint {
+    return PointExtensions.initialize(
+      Math.max(point1.x, point2.x),
+      Math.max(point1.y, point2.y)
+    );
   }
 
   public static matrixTransform(point: IPoint, element: SVGSVGElement): IPoint {
