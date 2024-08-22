@@ -23,4 +23,8 @@ export abstract class IPointerEvent {
   }
 
   public abstract getPosition(): IPoint;
+
+  public get isEventInLockedContext(): boolean {
+    return this.targetElement.closest('[fLockedContext]') !== null;
+  }
 }
