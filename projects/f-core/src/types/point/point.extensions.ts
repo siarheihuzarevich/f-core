@@ -54,7 +54,7 @@ export class PointExtensions {
   public static hypotenuse(point1: IPoint, point2: IPoint): number {
     const a = (point2.x - point1.x);
     const b = (point2.y - point1.y);
-    return Math.abs(Math.sqrt( a * a + b * b));
+    return Math.abs(Math.sqrt(a * a + b * b));
   }
 
   public static distance(point1: IPoint, point2: IPoint): number {
@@ -91,7 +91,7 @@ export class PointExtensions {
     return result;
   }
 
-  public static elementTransform(point: IPoint, element: HTMLElement): IPoint {
+  public static elementTransform(point: IPoint, element: HTMLElement | SVGElement): IPoint {
     let result: IPoint = PointExtensions.initialize(point.x, point.y);
 
     let matrix = element.getBoundingClientRect();

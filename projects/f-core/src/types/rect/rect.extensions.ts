@@ -69,6 +69,15 @@ export class RectExtensions {
     return this.initialize(rectCopy.x, rectCopy.y, rectCopy.width, rectCopy.height);
   }
 
+  public static div(rect: IRect, value: number): IRect {
+    const rectCopy = RectExtensions.copy(rect);
+    rectCopy.x /= value;
+    rectCopy.y /= value;
+    rectCopy.width /= value;
+    rectCopy.height /= value;
+    return this.initialize(rectCopy.x, rectCopy.y, rectCopy.width, rectCopy.height);
+  }
+
   public static addPointToSize(rect: IRect, point: IPoint): IRect {
     const rectCopy = RectExtensions.copy(rect);
     rectCopy.width += point.x;
@@ -85,5 +94,11 @@ export class RectExtensions {
       const maxY = Math.max(result.y + result.height, rect.y + rect.height);
       return RectExtensions.initialize(minX, minY, maxX - minX, maxY - minY);
     }, initialRect);
+  }
+
+  public static elementTransform(rect: IRect, element: HTMLElement | SVGElement): IRect {
+    const matrix = element.getBoundingClientRect();
+    const position = PointExtensions.sub(rect, PointExtensions.initialize(matrix.left, matrix.top));
+    return RectExtensions.initialize(position.x, position.y, rect.width, rect.height);
   }
 }

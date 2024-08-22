@@ -58,7 +58,7 @@ export class Point implements IPoint {
     return Point.fromPoint(result);
   }
 
-  public elementTransform(element: HTMLElement): Point {
+  public elementTransform(element: HTMLElement | SVGElement): Point {
 
     const result = PointExtensions.elementTransform(this, element);
 

@@ -1,4 +1,7 @@
-export * from './os/e-operation-system';
-export * from './os/get-operation-system';
-export * from './i-fake-mouse-event';
+export * from './e-operation-system';
+
 export * from './mouse-event.extensions';
+
+export * from './platform.service';
+
+export * from './window.service';

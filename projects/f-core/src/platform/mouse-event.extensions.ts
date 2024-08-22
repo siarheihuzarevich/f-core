@@ -1,10 +1,6 @@
-import { getOperationSystem } from './os/get-operation-system';
-import { EOperationSystem } from './os/e-operation-system';
-import { IFakeMouseEvent } from './index';
+import { EOperationSystem } from './e-operation-system';
 
 export class MouseEventExtensions {
-
-  public static os = getOperationSystem();
 
   public static isContextMenuEvent(event: MouseEvent): boolean {
     return event.type === 'contextmenu'
@@ -43,7 +39,12 @@ export class MouseEventExtensions {
     } as IFakeMouseEvent;
   }
 
-  public static isCommandButton(event: { metaKey: boolean, ctrlKey: boolean }): boolean {
-    return MouseEventExtensions.os === EOperationSystem.MAC_OS ? event.metaKey : event.ctrlKey;
+  public static isCommandButton(platform: EOperationSystem, event: { metaKey: boolean, ctrlKey: boolean }): boolean {
+    return platform === EOperationSystem.MAC_OS ? event.metaKey : event.ctrlKey;
   }
+}
+
+export interface IFakeMouseEvent extends MouseEvent {
+
+  metaKey: boolean;
 }
