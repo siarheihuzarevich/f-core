@@ -1,5 +1,8 @@
 import { EOperationSystem } from './e-operation-system';
 
+/**
+ * @deprecated This class is deprecated and will be removed in future versions.
+ */
 export class MouseEventExtensions {
 
   public static isContextMenuEvent(event: MouseEvent): boolean {

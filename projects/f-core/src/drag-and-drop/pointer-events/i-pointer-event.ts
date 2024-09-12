@@ -7,11 +7,15 @@ export abstract class IPointerEvent {
   }
 
   public get targetElement(): HTMLElement {
-    return this.originalEvent.target as HTMLElement;
+    return this.target || this.originalEvent.target as HTMLElement;
   }
 
-  protected constructor(private readonly event: (MouseEvent | TouchEvent)) {
+  protected constructor(private readonly event: (MouseEvent | TouchEvent), private target?: HTMLElement) {
     this.event = event;
+  }
+
+  public setTarget(target: HTMLElement): void {
+    this.target = target;
   }
 
   public abstract isMouseLeftButton(): boolean;

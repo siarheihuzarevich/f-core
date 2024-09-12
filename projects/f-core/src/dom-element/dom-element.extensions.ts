@@ -1,3 +1,6 @@
+/**
+ * @deprecated This class is deprecated and will be removed in future versions.
+ */
 export class DomElementExtensions {
 
   public static setDataToAllChildren(element: HTMLElement | SVGElement, attrName: string, value: string): void {
@@ -19,11 +22,16 @@ export class DomElementExtensions {
       }
     }
   }
-
+  /**
+   * @deprecated This method is deprecated and will be removed in future versions.
+   */
   public static createSvgElement<K extends keyof SVGElementTagNameMap>(tag: K): SVGElementTagNameMap[K] {
     return document.createElementNS('http://www.w3.org/2000/svg', tag);
   }
 
+  /**
+   * @deprecated This method is deprecated and will be removed in future versions.
+   */
   public static createHtmlElement<K extends keyof HTMLElementTagNameMap>(tag: K): HTMLElementTagNameMap[K] {
     return document.createElement(tag);
   }

@@ -3,8 +3,8 @@ import { IPoint } from '../../types';
 
 export class IMouseEvent extends IPointerEvent {
 
-  constructor(event: MouseEvent) {
-    super(event);
+  constructor(event: MouseEvent, target?: HTMLElement) {
+    super(event, target);
   }
 
   public isMouseLeftButton(): boolean {

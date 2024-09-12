@@ -30,11 +30,12 @@ export class RectExtensions {
   public static isIncludePoint(rect: IRect, point: IPoint): boolean {
     return point.x >= RectExtensions.left(rect) && point.x <= RectExtensions.right(rect) && point.y >= RectExtensions.top(rect) && point.y <= RectExtensions.bottom(rect);
   }
+
   public static intersectionWithRect(rect1: IRect, rect2: IRect): boolean {
     return !(rect1.x + rect1.width < rect2.x ||
-        rect2.x + rect2.width < rect1.x ||
-        rect1.y + rect1.height < rect2.y ||
-        rect2.y + rect2.height < rect1.y);
+      rect2.x + rect2.width < rect1.x ||
+      rect1.y + rect1.height < rect2.y ||
+      rect2.y + rect2.height < rect1.y);
   }
 
   public static left(rect: IRect): number {
@@ -85,15 +86,17 @@ export class RectExtensions {
     return this.initialize(rectCopy.x, rectCopy.y, rectCopy.width, rectCopy.height);
   }
 
-  public static union(rects: IRect[]): IRect {
-    const initialRect = rects?.length ? rects[ 0 ] : RectExtensions.initialize();
+  public static union(rects: IRect[]): IRect | null {
+    if (!rects || rects.length === 0) {
+      return null;
+    }
     return rects.reduce((result: IRect, rect) => {
       const minX = Math.min(result.x, rect.x);
       const minY = Math.min(result.y, rect.y);
       const maxX = Math.max(result.x + result.width, rect.x + rect.width);
       const maxY = Math.max(result.y + result.height, rect.y + rect.height);
       return RectExtensions.initialize(minX, minY, maxX - minX, maxY - minY);
-    }, initialRect);
+    }, rects[0]);
   }
 
   public static elementTransform(rect: IRect, element: HTMLElement | SVGElement): IRect {

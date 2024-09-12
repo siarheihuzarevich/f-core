@@ -10,6 +10,10 @@ try {
   hasV8BreakIterator = false;
 }
 
+/**
+ * @deprecated This class is deprecated and will be removed in future versions.
+ * Please use @foblex/platform instead.
+ */
 @Injectable({ providedIn: 'root' })
 export class PlatformService {
 
